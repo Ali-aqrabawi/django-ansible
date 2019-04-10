@@ -8,17 +8,20 @@ with Django projects
 
 Quick start
 -----------
+1. instal django-ansible::
 
-1. Add "dj_ansible" to your INSTALLED_APPS setting like this::
+    pip install django-ansible
+
+2. Add "dj_ansible" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
         'dj_ansible',
     ]
 
-2. Run `python manage.py migrate` to create the needed models.
+3. Run `python manage.py migrate` to create the needed models.
 
-3. add your inventory data to two tables
+4. add your inventory data to two tables
     - `ansible_network_groups` (model: AnsibleNetworkGroups)
     - `ansible_inventory_hosts` (model: AnsibleHosts)
 
