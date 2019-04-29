@@ -1,6 +1,6 @@
 from ansible.parsing.dataloader import DataLoader
 from ansible.inventory.manager import InventoryManager
-from dj_ansible.models import AnsibleNetworkGroups, AnsibleHosts
+from dj_ansible.models import AnsibleNetworkGroup, AnsibleNetworkHost
 from dj_ansible.exceptions import DjangoAnsibleError
 
 
@@ -9,8 +9,8 @@ class _Inventory(InventoryManager):
 
     def __init__(self):
         loader = DataLoader()
-        self.host_model = AnsibleHosts
-        self.network_group_model = AnsibleNetworkGroups
+        self.host_model = AnsibleNetworkHost
+        self.network_group_model = AnsibleNetworkGroup
         super(_Inventory, self).__init__(loader)
 
     def _add_group_childes(self, group):
