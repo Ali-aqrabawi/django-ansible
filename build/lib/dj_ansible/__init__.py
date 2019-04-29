@@ -1,5 +1,0 @@
-__title__ = 'Django Ansible'
-__version__ = '1.0.2'
-__author__ = 'Ali Aqrabawi'
-__license__ = 'MIT License'
-__copyright__ = 'Copyright 2019 Ali Aqrabawi'

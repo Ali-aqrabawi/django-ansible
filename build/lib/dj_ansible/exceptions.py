@@ -1,2 +1,0 @@
-class DjangoAnsibleError(Exception):
-    pass
