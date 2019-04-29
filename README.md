@@ -10,26 +10,26 @@ dj_ansible is a Django App that allow Django applications to integrate with Ansi
 basiclly it allow you to store inventory data in database using DjangoModels, and provide 
 an API to execute Json-like playbooks. 
 
-### Quick Start
+## Quick Start
 
-1. install django-ansible
+ 1. install django-ansible
 
     `pip install django-ansible`
 
-2. Add "dj_ansible" to your INSTALLED_APPS setting like this
+ 2. Add "dj_ansible" to your INSTALLED_APPS setting like this
 
-       INSTALLED_APPS = [
-        ...
-        'dj_ansible',
-       ]
+        INSTALLED_APPS = [
+           ...
+           'dj_ansible',
+        ]
 
-3. Run `python manage.py migrate` to create the needed tables.
+ 3. Run `python manage.py migrate` to create the needed tables.
 
-4. add your inventory data to two tables
-    - ansible_network_groups (model: `AnsibleNetworkGroup()`)
-    - ansible_network_hosts (model: `AnsibleNetworkHost()`)
+ 4. add your inventory data to two tables
+     - ansible_network_groups (model: `AnsibleNetworkGroup()`)
+     - ansible_network_hosts (model: `AnsibleNetworkHost()`)
     
-    like following :
+     like following :
     
         from dj_ansible.models import AnsibleNetworkHost,AnsibleNetworkGroup
 
@@ -46,38 +46,38 @@ an API to execute Json-like playbooks.
                                   group=my_group)
         host.save()
  
- ### Running Play-books
- to run play-books use the `execute` API to execute your play-books
+ ## Running Play-books
+  to run play-books use the `execute` API to execute your play-books
  
- ##### Example
+ ### Example
  
  1. create play-book dictionary
 
-        my_play = dict(
-                  name="may_first_play",
-                  hosts='cisco_firewalls',
-                  become='yes',
-                  become_method='enable',
-                  gather_facts='no',
-                  tasks=[
-                      dict(action=dict(module='asa_command', commands=['show version','show ip'])),
-                      dict(action=dict(module='asa_config', lines=['network-object host 10.1.0.1'])
-                  ]
-              )
-              
-2.  run `my_play` using the `execute` API
+         my_play = dict(
+                   name="may_first_play",
+                   hosts='cisco_firewalls',
+                   become='yes',
+                   become_method='enable',
+                   gather_facts='no',
+                   tasks=[
+                       dict(action=dict(module='asa_command', commands=['show version','show ip'])),
+                       dict(action=dict(module='asa_config', lines=['network-object host 10.1.0.1'])
+                   ]
+               )
 
-        from dj_ansible.ansible_kit import execute
-    
-        result = execute(my_play)
-        # print the stats
-        print(json.dumps(result.stats, indent=4))
-        # print execution results
-        print(json.dumps(result.results, indent=4))
+ 2.  run `my_play` using the `execute` API
 
-3. the `result` object consist of two jsons:
+         from dj_ansible.ansible_kit import execute
+          
+         result = execute(my_play)
+         # print the stats
+         print(json.dumps(result.stats, indent=4))
+         # print execution results
+         print(json.dumps(result.results, indent=4))
 
-- first `state`, which look like this:
+ 3. the `result` object consist of two jsons:
+
+  - first `state`, which look like this:
 
         {
         "all_ok": false,
@@ -129,120 +129,120 @@ an API to execute Json-like playbooks.
             }
         ]}
 
-- and `result`, which looks like this:
+  - and `result`, which looks like this:
 
-      {
-      "failed": [
-          {
-              "host": "ios_switch1",
-              "tasks": [
-                  {
-                      "name": "asa_command",
-                      "result": {
-                          "msg": "timed out",
-                          "_ansible_no_log": false
-                      }
-                  }
-              ]
-          }
-      ],
-      "success": [
-          {
-              "host": "fw2",
-              "tasks": [
-                  {
-                      "name": "asa_command",
-                      "result": {
-                          "invocation": {
-                              "module_args": {
-                                  "username": null,
-                                  "authorize": null,
-                                  "password": null,
-                                  "passwords": null,
-                                  "context": null,
-                                  "retries": 10,
-                                  "auth_pass": null,
-                                  "interval": 1,
-                                  "commands": [
-                                      "show version"
-                                  ],
-                                  "host": null,
-                                  "ssh_keyfile": null,
-                                  "timeout": null,
-                                  "provider": null,
-                                  "wait_for": null,
-                                  "port": null,
-                                  "match": "all"
-                              }
-                          },
-                          "stdout_lines": [
-                              [
-                                  "Cisco Adaptive Security Appliance Software Version 9.5(3)6 ",
-                                  "Device Manager Version 7.1(3)",
-                                  ....
-                                  "Configuration last modified by enable_15 at 12:55:31.479 EDT Sun Apr 7 2019"
-                              ]
-                          ],
-                          "changed": false,
-                          "stdout": [
-                              "Cisco Adaptive Security Appliance Software Version 9.5(3)6 \nDevice Manager Version 7.1(3)\n\n... ],
-                          "_ansible_parsed": true,
-                          "_ansible_no_log": false
-                      }
-                  }
-              ]
-          },
-          {
-              "host": "fw1",
-              "tasks": [
-                  {
-                      "name": "asa_command",
-                      "result": {
-                          "invocation": {
-                              "module_args": {
-                                  "username": null,
-                                  "authorize": null,
-                                  "password": null,
-                                  "passwords": null,
-                                  "context": null,
-                                  "retries": 10,
-                                  "auth_pass": null,
-                                  "interval": 1,
-                                  "commands": [
-                                      "show version"
-                                  ],
-                                  "host": null,
-                                  "ssh_keyfile": null,
-                                  "timeout": null,
-                                  "provider": null,
-                                  "wait_for": null,
-                                  "port": null,
-                                  "match": "all"
-                              }
-                          },
-                          "stdout_lines": [
-                              [
-                                  "Cisco Adaptive Security Appliance Software Version 9.1(7)16 ",
-                                  "",
-                                  "Compiled on Thu 30-Mar-17 17:39 by builders",
-                                  "System image file is \"disk0:/asa917-16-k8.bin\"",
-                                  "Config file at boot was \"startup-config\"",
-                                  "",
-                                  ....
-                                  "Configuration register is 0x1",
-                                  "Configuration last modified by admin at 16:25:49.318 UTC Sat Apr 6 2019"
-                              ]
-                          ],
-                          "changed": false,
-                          "stdout": [
-                              "Cisco Adaptive Security Appliance Software Version 9.1(7)16 \n\n.... ],
-                          "_ansible_parsed": true,
-                          "_ansible_no_log": false
-                      }
-                  }
-              ]
-          }
-      ]}
+        {
+        "failed": [
+            {
+                "host": "ios_switch1",
+                "tasks": [
+                    {
+                        "name": "asa_command",
+                        "result": {
+                            "msg": "timed out",
+                            "_ansible_no_log": false
+                        }
+                    }
+                ]
+            }
+        ],
+        "success": [
+            {
+                "host": "fw2",
+                "tasks": [
+                    {
+                        "name": "asa_command",
+                        "result": {
+                            "invocation": {
+                                "module_args": {
+                                    "username": null,
+                                    "authorize": null,
+                                    "password": null,
+                                    "passwords": null,
+                                    "context": null,
+                                    "retries": 10,
+                                    "auth_pass": null,
+                                    "interval": 1,
+                                    "commands": [
+                                        "show version"
+                                    ],
+                                    "host": null,
+                                    "ssh_keyfile": null,
+                                    "timeout": null,
+                                    "provider": null,
+                                    "wait_for": null,
+                                    "port": null,
+                                    "match": "all"
+                                }
+                            },
+                            "stdout_lines": [
+                                [
+                                    "Cisco Adaptive Security Appliance Software Version 9.5(3)6 ",
+                                    "Device Manager Version 7.1(3)",
+                                    ....
+                                    "Configuration last modified by enable_15 at 12:55:31.479 EDT Sun Apr 7 2019"
+                                ]
+                            ],
+                            "changed": false,
+                            "stdout": [
+                                "Cisco Adaptive Security Appliance Software Version 9.5(3)6 \nDevice Manager Version 7.1(3)\n\n... ],
+                            "_ansible_parsed": true,
+                            "_ansible_no_log": false
+                        }
+                    }
+                ]
+            },
+            {
+                "host": "fw1",
+                "tasks": [
+                    {
+                        "name": "asa_command",
+                        "result": {
+                            "invocation": {
+                                "module_args": {
+                                    "username": null,
+                                    "authorize": null,
+                                    "password": null,
+                                    "passwords": null,
+                                    "context": null,
+                                    "retries": 10,
+                                    "auth_pass": null,
+                                    "interval": 1,
+                                    "commands": [
+                                        "show version"
+                                    ],
+                                    "host": null,
+                                    "ssh_keyfile": null,
+                                    "timeout": null,
+                                    "provider": null,
+                                    "wait_for": null,
+                                    "port": null,
+                                    "match": "all"
+                                }
+                            },
+                            "stdout_lines": [
+                                [
+                                    "Cisco Adaptive Security Appliance Software Version 9.1(7)16 ",
+                                    "",
+                                    "Compiled on Thu 30-Mar-17 17:39 by builders",
+                                    "System image file is \"disk0:/asa917-16-k8.bin\"",
+                                    "Config file at boot was \"startup-config\"",
+                                    "",
+                                    ....
+                                    "Configuration register is 0x1",
+                                    "Configuration last modified by admin at 16:25:49.318 UTC Sat Apr 6 2019"
+                                ]
+                            ],
+                            "changed": false,
+                            "stdout": [
+                                "Cisco Adaptive Security Appliance Software Version 9.1(7)16 \n\n.... ],
+                            "_ansible_parsed": true,
+                            "_ansible_no_log": false
+                        }
+                    }
+                ]
+            }
+        ]}
   
 #### Note
 for now dj_ansible support network devices inventory only, contibution is so welcome to add support for other

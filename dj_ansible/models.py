@@ -1,9 +1,7 @@
 from django.db import models
 from dj_ansible import const
 
-"""
-Bases
-"""
+"""Bases"""
 
 
 class BaseAnsibleGroup(models.Model):
@@ -31,9 +29,7 @@ class BaseAnsibleHost(models.Model):
         abstract = True
 
 
-"""
-Groups Models
-"""
+"""Groups Models"""
 
 
 class AnsibleNetworkGroup(BaseAnsibleDeviceGroup):
@@ -67,9 +63,7 @@ class AnsibleAWSGroup(BaseAnsibleGroup):
         app_label = 'dj_ansible'
 
 
-"""
-Hosts Models
-"""
+"""Hosts Models"""
 
 
 class AnsibleNetworkHost(BaseAnsibleHost):
