@@ -22,10 +22,11 @@ an API to execute Json-like playbooks.
            ...
            'dj_ansible',
         ]
+ 3. Run `python manage.py makemigrations` to create migrations for the tables.
+ 
+ 4. Run `python manage.py migrate` to create the needed tables.
 
- 3. Run `python manage.py migrate` to create the needed tables.
-
- 4. add your inventory data to two tables
+ 5. add your inventory data to two tables
      - ansible_network_groups (model: `AnsibleNetworkGroup()`)
      - ansible_network_hosts (model: `AnsibleNetworkHost()`)
     
