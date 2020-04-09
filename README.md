@@ -8,7 +8,9 @@
 
 dj_ansible is a Django App that allow Django applications to integrate with Ansible.
 basiclly it allow you to store inventory data in database using DjangoModels, and provide 
-an API to execute Json-like playbooks. 
+an API to execute Json-like playbooks.
+
+`currently supported on Ansible <= 2.7.10`
 
 ## Quick Start
 

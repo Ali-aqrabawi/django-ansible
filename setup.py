@@ -13,7 +13,7 @@ setup(
     version=__version__,
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['ansible'],
+    install_requires=['ansible>=2.7.10'],
     license=__license__,
     description='Django app which provide an APIs to integrate Ansible with Django projects',
     long_description=long_description,

@@ -130,7 +130,7 @@ def execute(play_source, custom_callback=None, forks=10, connection='paramiko'):
         tqm.run(play)  # most interesting data for a play is actually sent to the callback's methods
     except Exception as e:
         raise DjangoAnsibleError(str(e))
-    finally:
+    else:
         # we always need to cleanup child procs and the structres we use to communicate with them
         result = call_back.results
         stats = tqm._stats
