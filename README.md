@@ -3,7 +3,7 @@
 ![PyPI](https://img.shields.io/pypi/v/django-ansible.svg)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-ansible.svg)
 ![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-ansible.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f726043dc76428cb553c726ca388c5f)](https://www.codacy.com/app/Ali-aqrabawi/django-ansible?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ali-aqrabawi/django-ansible&amp;utm_campaign=Badge_Grade)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=180637776" height="20">](https://api.gitsponsors.com/api/badge/link?p=2VpNBX037FaQBTrjdgJb/pnKqgYm2ttaFza1soRE6+vFower4Z6os3Q3lmBJY40UWKHt3JDPvKUTvbcJC8sj8NewO0i9jvU54u5nkUO061wA21bG5nXosoZjIJE2p4+/tUZgCv0oSkMdxdUMGTnkIw==)
 ![GitHub](https://img.shields.io/github/license/ali-aqrabawi/django-ansible.svg)
 
 dj_ansible is a Django App that allow Django applications to integrate with Ansible.
